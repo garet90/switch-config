@@ -21,25 +21,17 @@ vlan:
     id: 8
     ip: 10.211.8.1/24
 acl:
-  - [
-      {vlan: oob-mgmt},
-      {vlan: internal-svcs}
-    ]
-  - [
+  - [ # so external vpn can access all components (access control is handled by cloudflare zero trust)
       {vlan: vpn},
       all-vlan
     ]
-  - [
+  - [ # so prometheus can scrape all components
       {vlan: monitoring},
       all-vlan
     ]
-  - [
+  - [ # so proxmox knows when to shut down by monitoring UPS
       {vlan: proxmox},
       {vlan: oob-mgmt}
-    ]
-  - [
-      {vlan: proxmox},
-      {vlan: internal-svcs}
     ]
   - [
       {vlan: development},

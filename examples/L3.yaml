@@ -5,7 +5,7 @@ vlan:
     acl:
       outbound:
         internet: allow
-  out-of-band-management:
+  oob-mgmt:
     id: 3
     ip: 10.211.3.1/24
     acl:
@@ -15,7 +15,7 @@ vlan:
           10.211.7.2: allow
           10.211.7.3: allow
         vlan:
-          internal-services: allow
+          internal-svcs: allow
   vpn:
     id: 4
     ip: 10.211.4.1/24
@@ -40,7 +40,7 @@ vlan:
           10.211.3.253: allow
           10.211.7.2: allow
           10.211.7.3: allow
-  internal-services:
+  internal-svcs:
     id: 7
     ip: 10.211.7.1/24
     acl:
@@ -53,7 +53,7 @@ vlan:
       outbound:
         internet: allow
         vlan:
-          internal-services: allow
+          internal-svcs: allow
 route:
   0.0.0.0/0: 10.211.2.1
 interface:
@@ -67,7 +67,7 @@ interface:
         - vpn
         - monitoring
         - proxmox
-        - internal-services
+        - internal-svcs
         - development
   e101-019-0: # proxmox node 1
     vlan:
@@ -76,9 +76,9 @@ interface:
         - vpn
         - monitoring
         - proxmox
-        - internal-services
+        - internal-svcs
         - development
   e101-020-0: # downlink to L2 switch
     vlan:
-      untagged: out-of-band-management
+      untagged: oob-mgmt
       tagged: all

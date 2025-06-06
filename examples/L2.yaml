@@ -1,7 +1,7 @@
 vlan:
   wan:
     id: 2
-  out-of-band-management:
+  oob-mgmt:
     id: 3
     ip: 10.211.3.254/24 # to allow this switch to be managed on this vlan
   vpn:
@@ -10,18 +10,26 @@ vlan:
     id: 5
   proxmox:
     id: 6
-  internal-services:
+  internal-svcs:
     id: 7
   development:
     id: 8
 interface:
+  dummy0:
+    ignore: true
+  eth0:
+    ignore: true
+  lo:
+    ignore: true
+  npu-0:
+    ignore: true
   e101-016-0: # eaton ups
     vlan:
-      untagged: out-of-band-management
+      untagged: oob-mgmt
   e101-017-0: # idrac
     vlan:
-      untagged: out-of-band-management
+      untagged: oob-mgmt
   e101-20-0: # uplink to L3 switch
     vlan:
-      untagged: out-of-band-management
+      untagged: oob-mgmt
       tagged: all

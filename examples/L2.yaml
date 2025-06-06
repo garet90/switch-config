@@ -14,22 +14,28 @@ vlan:
     id: 7
   development:
     id: 8
+route:
+  0.0.0.0/0: 10.211.3.1
 interface:
-  dummy0:
-    ignore: true
-  eth0:
-    ignore: true
-  lo:
-    ignore: true
-  npu-0:
-    ignore: true
-  e101-016-0: # eaton ups
+  e101-001-0: # patricia idrac
     vlan:
       untagged: oob-mgmt
-  e101-017-0: # idrac
+  e101-017-0: # steven network-m2
     vlan:
       untagged: oob-mgmt
-  e101-20-0: # uplink to L3 switch
+  e101-49-0: # uplink to L3 switch
+    vlan:
+      untagged: oob-mgmt
+      tagged: all
+  e101-50-0: # uplink to L3 switch
+    vlan:
+      untagged: oob-mgmt
+      tagged: all
+  e101-51-0: # uplink to L3 switch
+    vlan:
+      untagged: oob-mgmt
+      tagged: all
+  e101-52-0: # uplink to L3 switch
     vlan:
       untagged: oob-mgmt
       tagged: all

@@ -2,58 +2,49 @@ vlan:
   wan:
     id: 2
     ip: 10.211.2.254/24 # .1 is the actual gateway, set by OPNSense
-    acl:
-      outbound:
-        internet: allow
   oob-mgmt:
     id: 3
     ip: 10.211.3.1/24
-    acl:
-      outbound:
-        internet: allow
-        ip:
-          10.211.7.2: allow
-          10.211.7.3: allow
-        vlan:
-          internal-svcs: allow
   vpn:
     id: 4
     ip: 10.211.4.1/24
-    acl:
-      outbound:
-        internet: allow
-        vlan: allow
   monitoring:
     id: 5
     ip: 10.211.5.1/24
-    acl:
-      outbound:
-        internet: allow
-        vlan: allow
   proxmox:
     id: 6
     ip: 10.211.6.1/24
-    acl:
-      outbound:
-        internet: allow
-        ip:
-          10.211.3.253: allow
-          10.211.7.2: allow
-          10.211.7.3: allow
   internal-svcs:
     id: 7
     ip: 10.211.7.1/24
-    acl:
-      outbound:
-        internet: allow
   development:
     id: 8
     ip: 10.211.8.1/24
-    acl:
-      outbound:
-        internet: allow
-        vlan:
-          internal-svcs: allow
+acl:
+  - [
+      {vlan: oob-mgmt},
+      {vlan: internal-svcs}
+    ]
+  - [
+      {vlan: vpn},
+      all-vlan
+    ]
+  - [
+      {vlan: monitoring},
+      all-vlan
+    ]
+  - [
+      {vlan: proxmox},
+      {vlan: oob-mgmt}
+    ]
+  - [
+      {vlan: proxmox},
+      {vlan: internal-svcs}
+    ]
+  - [
+      {vlan: development},
+      {vlan: internal-svcs}
+    ]
 route:
   0.0.0.0/0: 10.211.2.1
 interface:

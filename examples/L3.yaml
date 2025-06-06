@@ -1,0 +1,84 @@
+vlan:
+  wan:
+    id: 2
+    ip: 10.211.2.254/24 # .1 is the actual gateway, set by OPNSense
+    acl:
+      outbound:
+        internet: allow
+  out-of-band-management:
+    id: 3
+    ip: 10.211.3.1/24
+    acl:
+      outbound:
+        internet: allow
+        ip:
+          10.211.7.2: allow
+          10.211.7.3: allow
+        vlan:
+          internal-services: allow
+  vpn:
+    id: 4
+    ip: 10.211.4.1/24
+    acl:
+      outbound:
+        internet: allow
+        vlan: allow
+  monitoring:
+    id: 5
+    ip: 10.211.5.1/24
+    acl:
+      outbound:
+        internet: allow
+        vlan: allow
+  proxmox:
+    id: 6
+    ip: 10.211.6.1/24
+    acl:
+      outbound:
+        internet: allow
+        ip:
+          10.211.3.253: allow
+          10.211.7.2: allow
+          10.211.7.3: allow
+  internal-services:
+    id: 7
+    ip: 10.211.7.1/24
+    acl:
+      outbound:
+        internet: allow
+  development:
+    id: 8
+    ip: 10.211.8.1/24
+    acl:
+      outbound:
+        internet: allow
+        vlan:
+          internal-services: allow
+route:
+  0.0.0.0/0: 10.211.2.1
+interface:
+  e101-017-0: # wan port
+    vlan:
+      untagged: wan
+  e101-018-0: # proxmox node 0
+    vlan:
+      untagged: proxmox
+      tagged:
+        - vpn
+        - monitoring
+        - proxmox
+        - internal-services
+        - development
+  e101-019-0: # proxmox node 1
+    vlan:
+      untagged: proxmox
+      tagged:
+        - vpn
+        - monitoring
+        - proxmox
+        - internal-services
+        - development
+  e101-020-0: # downlink to L2 switch
+    vlan:
+      untagged: out-of-band-management
+      tagged: all

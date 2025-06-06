@@ -1,0 +1,27 @@
+vlan:
+  wan:
+    id: 2
+  out-of-band-management:
+    id: 3
+    ip: 10.211.3.254/24 # to allow this switch to be managed on this vlan
+  vpn:
+    id: 4
+  monitoring:
+    id: 5
+  proxmox:
+    id: 6
+  internal-services:
+    id: 7
+  development:
+    id: 8
+interface:
+  e101-016-0: # eaton ups
+    vlan:
+      untagged: out-of-band-management
+  e101-017-0: # idrac
+    vlan:
+      untagged: out-of-band-management
+  e101-20-0: # uplink to L3 switch
+    vlan:
+      untagged: out-of-band-management
+      tagged: all

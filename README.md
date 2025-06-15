@@ -27,4 +27,4 @@ I run a Dell S5148F-ON for 10/25/40/100GbE and a Dell S3048-ON for 10/100/1000M 
 
 The OPNSense firewall has `10.211.2.2/16` as its LAN so using it as the next hop for all VLANs works like in my example.
 
-[Picture of my setup](example.jpg)
+![Picture of my setup](example.jpg)

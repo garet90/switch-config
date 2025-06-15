@@ -1,82 +1,45 @@
 vlan:
   wan:
     id: 2
-    ip: 10.211.2.254/24 # .1 is the actual gateway, set by OPNSense
-  oob-mgmt:
+    ip: 10.211.2.1/24
+  management:
     id: 3
     ip: 10.211.3.1/24
-  vpn:
+  proxmox:
     id: 4
     ip: 10.211.4.1/24
-  monitoring:
+  vpn:
     id: 5
     ip: 10.211.5.1/24
-  proxmox:
+  monitoring:
     id: 6
     ip: 10.211.6.1/24
-  internal-svcs:
+  internal-services:
     id: 7
     ip: 10.211.7.1/24
   development:
     id: 8
     ip: 10.211.8.1/24
-acl:
-  - [ # so external vpn can access all components (access control is handled by cloudflare zero trust)
-      {vlan: vpn},
-      all-vlan
-    ]
-  - [ # so prometheus can scrape all components
-      {vlan: monitoring},
-      all-vlan
-    ]
-  - [ # so proxmox knows when to shut down by monitoring UPS
-      {vlan: proxmox},
-      {vlan: oob-mgmt}
-    ]
-  - [
-      {vlan: development},
-      {vlan: internal-svcs}
-    ]
 route:
-  0.0.0.0/0: 10.211.2.1
+  0.0.0.0/0: 10.211.2.2
 interface:
   e101-001-0: # OPNSense 0 port
     vlan:
       untagged: wan
-  e101-002-0: # OPNSense 1 port
+  e101-003-0:
     vlan:
-      untagged: wan
-  e101-003-0: # downlink to L2 switch
-    vlan:
-      untagged: oob-mgmt
+      untagged: management
       tagged: all
-  e101-004-0: # downlink to L2 switch
-    vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-005-0: # downlink to L2 switch
-    vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-006-0: # downlink to L2 switch
-    vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-049-0: # patricia proxmox
+  e101-017-0:
     vlan:
       untagged: proxmox
-      tagged:
-        - vpn
-        - monitoring
-        - proxmox
-        - internal-svcs
-        - development
-  e101-017-0: # susan proxmox
+      tagged: all
+  e101-049-0:
+    connection:
+      autoneg: 'off'
+      speed: 100G
+      duplex: full
+      fec: cl91-rs
     vlan:
       untagged: proxmox
-      tagged:
-        - vpn
-        - monitoring
-        - proxmox
-        - internal-svcs
-        - development
+      tagged: all

@@ -1,41 +1,32 @@
 vlan:
   wan:
     id: 2
-  oob-mgmt:
+  management:
     id: 3
-    ip: 10.211.3.254/24 # to allow this switch to be managed on this vlan
-  vpn:
-    id: 4
-  monitoring:
-    id: 5
+    ip: 10.211.3.2/24
   proxmox:
+    id: 4
+  vpn:
+    id: 5
+  monitoring:
     id: 6
-  internal-svcs:
+  internal-services:
     id: 7
   development:
     id: 8
 route:
   0.0.0.0/0: 10.211.3.1
 interface:
-  e101-001-0: # patricia idrac
+  e101-001-0:
     vlan:
-      untagged: oob-mgmt
-  e101-017-0: # steven network-m2
+      untagged: management
+  e101-002-0:
     vlan:
-      untagged: oob-mgmt
-  e101-49-0: # uplink to L3 switch
+      untagged: management
+  e101-003-0:
     vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-50-0: # uplink to L3 switch
+      untagged: management
+  e101-049-0:
     vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-51-0: # uplink to L3 switch
-    vlan:
-      untagged: oob-mgmt
-      tagged: all
-  e101-52-0: # uplink to L3 switch
-    vlan:
-      untagged: oob-mgmt
+      untagged: management
       tagged: all

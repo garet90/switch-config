@@ -4,18 +4,13 @@ See L3 routing examples in examples/L3.yaml, or L2 in examples/L2.yaml.
 If you want, you can add a generator for your own switch type in generators/.
 I might add more NOS in the future if I try them out.
 
-## OpenSwitch OPX Setup
+## OpenSwitch OPX Installation
 This tool works for both OpenSwitch 2.x and 3.x.
 If you are using a Dell S5148F-ON, you'll want to use a 2.x version because 3.x has issues with mac learning.
 
-Start by installing `pyyaml` for Python 2:
+To install, run:
 ```
-sudo pip install pyyaml==5.4.1
-```
-
-Then, after `opx-show-system-status` indicates the system is running:
-```
-sudo python generators/opx.py --file examples/L2.yaml
+sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/install.sh)"
 ```
 
 ## My Configuration

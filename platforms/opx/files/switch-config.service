@@ -1,0 +1,7 @@
+[Unit]
+Description=Configures and activates the switch
+After=opx-cps.service opx-pas.service opx-nas.service opx-platform-init.service
+Wants=opx-cps.service opx-pas.service opx-nas.service opx-platform-init.service
+
+[Service]
+ExecStart=/usr/bin/switch-config.py --file /etc/switch-config/config.yaml

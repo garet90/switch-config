@@ -4,7 +4,7 @@ echo "Installing dependencies..."
 pip install pyyaml==5.4.1
 
 echo "Installing switch-config..."
-curl -fsSL -o /usr/bin/switch-config https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/files/switch-config
+wget -q -O /usr/bin/switch-config https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/files/switch-config
 chmod +x /usr/bin/switch-config
 
 if [ -f "/etc/switch-config/config.yaml" ]; then
@@ -12,11 +12,11 @@ if [ -f "/etc/switch-config/config.yaml" ]; then
 else
   echo "Creating default config..."
   mkdir -p /etc/switch-config
-  curl -fsSL -o /etc/switch-config/config.yaml https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/examples/default.yaml
+  wget -q -O /etc/switch-config/config.yaml https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/examples/default.yaml
 fi
 
 echo "Creating service..."
-curl -fsSL -o /lib/systemd/system/switch-config.service https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/files/switch-config.service
+wget -q -O /lib/systemd/system/switch-config.service https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/files/switch-config.service
 systemctl enable switch-config.service
 systemctl start switch-config.service
 

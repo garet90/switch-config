@@ -10,7 +10,7 @@ If you are using a Dell S5148F-ON, you'll want to use a 2.x version because 3.x 
 
 To install, run:
 ```
-sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/install.sh)"
+sudo /bin/bash -c "$(wget -q -O - https://raw.githubusercontent.com/garet90/switch-config/refs/heads/main/platforms/opx/install.sh)"
 ```
 
 ## My Configuration

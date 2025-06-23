@@ -1,10 +1,10 @@
 [Unit]
-Description=Configures and activates the switch
-After=opx-cps.service opx-pas.service opx-nas.service opx-platform-init.service
-Wants=opx-cps.service opx-pas.service opx-nas.service opx-platform-init.service
+Description=Switch Config
+After=opx-acl-init.service opx-acl-persistency.service opx-alms.service opx-autoconf.service opx-cps-connectivity.service opx-cps-db.service opx-cps.service opx-create-interface.service opx-interface-manager.service opx-ip.service opx-lkm-init.service opx-lpc-chk.service opx-mcast-snoop.service opx-nas-init.service opx-nas-mac-config.service opx-nas-shell.service opx-nas.service opx-nbmgr.service opx-pas.service opx-platform-init.service opx-pysnmp.service opx-qos-init.service opx-system-utils-db.service opx-system-utils.service opx-tmpctl.service opx-vrf.service opx-front-panel-ports.service opx-ip.service opx-monitor-phy-media.service opx-phy-media-config.service opx-udrvr-ethernet.service
 
 [Service]
-ExecStart=/usr/bin/switch-config --file /etc/switch-config/config.yaml
+ExecStart=/usr/bin/sudo /usr/bin/switch-config --file /etc/switch-config/config.yaml
+Environment="PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 [Install]
 WantedBy=multi-user.target

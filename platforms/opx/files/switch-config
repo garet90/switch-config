@@ -25,7 +25,7 @@ for interface_name in os.listdir('/sys/class/net'):
 
 # bring down interfaces
 for interface_name in os.listdir('/sys/class/net'):
-	if interface_name in ['dummy0', 'npu-0', 'lo']:
+	if not interface_name.startswith('e101-'):
 		continue
 
 	print('bringing down interface ' + interface_name + '...')

@@ -20,4 +20,4 @@ curl -fsSL -o /lib/systemd/system/switch-config.service https://raw.githubuserco
 systemctl enable switch-config.service
 systemctl start switch-config.service
 
-echo "Installation successful! Edit `/etc/switch-config/config.yaml` to configure your switch and `systemctl restart switch-config` to reload"
+echo "Installation successful! Edit '/etc/switch-config/config.yaml' to configure your switch and 'systemctl restart switch-config' to reload"
